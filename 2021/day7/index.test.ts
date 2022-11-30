@@ -1,5 +1,6 @@
 import { getFuelCost } from ".";
 import { input } from "../input/day7";
+import { describe, expect, it } from 'vitest'
 
 describe("day 7", () => {
   it("should match sample for puzzle 1", () => {

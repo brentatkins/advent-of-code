@@ -1,5 +1,6 @@
 import { calculateXY, calculateXYAim, Direction } from ".";
 import { input } from "../input/day2";
+import { describe, expect, it } from 'vitest'
 
 describe("day 1", () => {
   it("should match sample for puzzle 1", () => {

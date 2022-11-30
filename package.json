@@ -7,22 +7,18 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "27.0.3",
-    "@types/node": "^10.4.0",
-    "jest": "27.4.1",
     "prettier": "2.5.1",
-    "ts-jest": "27.0.7",
-    "ts-node": "10.4.0",
-    "typescript": "4.5.2"
+    "vite": "^3.2.4",
+    "vitest": "^0.25.3"
   },
   "dependencies": {
-    "@types/ramda": "^0.27.58",
-    "ramda": "^0.27.1"
+    "@types/ramda": "^0.28.20",
+    "ramda": "^0.28.0"
   }
 }

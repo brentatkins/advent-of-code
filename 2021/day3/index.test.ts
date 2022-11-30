@@ -1,5 +1,6 @@
 import { calculateGammaEpsilon, calculateOxygenC02 } from ".";
 import { input } from "../input/day3";
+import { describe, expect, it } from 'vitest'
 
 describe("day 3", () => {
   it("should match sample for puzzle 1", () => {

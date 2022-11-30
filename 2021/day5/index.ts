@@ -1,4 +1,4 @@
-import R from "ramda";
+import * as R from "ramda";
 
 class Point {
   constructor(public x: number, public y: number) {}
@@ -11,6 +11,7 @@ class Point {
     return `key-x${this.x}-y${this.y}`;
   }
 }
+
 
 type LineSegment = {
   start: Point;
@@ -88,12 +89,16 @@ const getPointsCoveredByLine =
     return [];
   };
 
+  
+
 export const getPointsWithOverlappingLines = (
   rawInput: string,
   minimumOverlap: number,
   includeDiagonals: boolean = false
 ) => {
   const lineSegments = parseInput(rawInput);
+
+
 
   const countAboveMin = R.pipe(
     R.map<LineSegment, Point[]>(getPointsCoveredByLine(includeDiagonals)),

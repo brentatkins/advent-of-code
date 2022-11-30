@@ -1,5 +1,6 @@
 import { calculateBingoScore } from ".";
 import { input } from "../input/day4";
+import { describe, expect, it } from 'vitest'
 
 describe("day 4", () => {
   it("should match sample for puzzle 1", () => {

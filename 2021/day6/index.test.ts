@@ -1,5 +1,6 @@
 import {countLanternFish} from ".";
 import {input} from "../input/day6";
+import { describe, expect, it } from 'vitest'
 
 describe("day 6", () => {
     it("should match sample for puzzle 1", () => {
