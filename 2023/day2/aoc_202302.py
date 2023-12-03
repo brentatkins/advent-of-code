@@ -4,10 +4,8 @@ import pathlib
 import sys
 from icecream import ic
 
-
 def parse(puzzle_input):
     scores_map = {}
-
     for line in puzzle_input.splitlines():
         parts = line.split(": ")
         game_id = int(parts[0].split()[1])
