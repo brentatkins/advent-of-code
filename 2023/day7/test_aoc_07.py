@@ -28,13 +28,13 @@ def test_parse_example1(example1):
 
 
 def test_score_hand():
-    assert aoc.score_hand('AAAAA') == aoc.Scores.FIVE_OF_A_KIND
-    assert aoc.score_hand('AA8AA') == aoc.Scores.FOUR_OF_A_KIND
-    assert aoc.score_hand('23332') == aoc.Scores.FULL_HOUSE
-    assert aoc.score_hand('TTT98') == aoc.Scores.THREE_OF_A_KIND
-    assert aoc.score_hand('23432') == aoc.Scores.TWO_PAIR
-    assert aoc.score_hand('A23A4') == aoc.Scores.ONE_PAIR
-    assert aoc.score_hand('23456') == aoc.Scores.HIGH_CARD
+    assert aoc.score_hand('AAAAA') == aoc.Scores.FIVE_OF_A_KIND.value
+    assert aoc.score_hand('AA8AA') == aoc.Scores.FOUR_OF_A_KIND.value
+    assert aoc.score_hand('23332') == aoc.Scores.FULL_HOUSE.value
+    assert aoc.score_hand('TTT98') == aoc.Scores.THREE_OF_A_KIND.value
+    assert aoc.score_hand('23432') == aoc.Scores.TWO_PAIR.value
+    assert aoc.score_hand('A23A4') == aoc.Scores.ONE_PAIR.value
+    assert aoc.score_hand('23456') == aoc.Scores.HIGH_CARD.value
 
 
 

@@ -34,21 +34,8 @@ card_rank = {
     "2": 2,
 }
 
-card_rank_joker = {
-    "A": 14,
-    "K": 13,
-    "Q": 12,
-    "J": 1,
-    "T": 10,
-    "9": 9,
-    "8": 8,
-    "7": 7,
-    "6": 6,
-    "5": 5,
-    "4": 4,
-    "3": 3,
-    "2": 2,
-}
+card_rank_joker = card_rank.copy()
+card_rank_joker['J'] = 1
 
 
 def parse(puzzle_input):
@@ -67,19 +54,19 @@ def score_hand(hand):
 
     match sorted(counts.values(), reverse=True):
         case [5]:
-            return Scores.FIVE_OF_A_KIND
+            return Scores.FIVE_OF_A_KIND.value
         case [4, 1]:
-            return Scores.FOUR_OF_A_KIND
+            return Scores.FOUR_OF_A_KIND.value
         case [3, 2]:
-            return Scores.FULL_HOUSE
+            return Scores.FULL_HOUSE.value
         case [3, 1, 1]:
-            return Scores.THREE_OF_A_KIND
+            return Scores.THREE_OF_A_KIND.value
         case [2, 2, 1]:
-            return Scores.TWO_PAIR
+            return Scores.TWO_PAIR.value
         case [2, 1, 1, 1]:
-            return Scores.ONE_PAIR
+            return Scores.ONE_PAIR.value
         case [1, 1, 1, 1, 1]:
-            return Scores.HIGH_CARD
+            return Scores.HIGH_CARD.value
         case _:
             raise ValueError(hand)
 
@@ -100,14 +87,14 @@ def replace_jokers(hand):
 
 
 def part1(lines):
-    ordered_hands = sorted(lines, key=lambda x: (score_hand(x[0]).value, [card_rank[card] for card in x[0]]))
-    total = sum((i + 1) * score for i, (_, score) in enumerate(ordered_hands))
+    ordered_hands = sorted(lines, key=lambda x: (score_hand(x[0]), [card_rank[card] for card in x[0]]))
+    total = sum(rank * bid for rank, (_, bid) in enumerate(ordered_hands, 1))
     return total
 
 
 def part2(lines):
-    ordered_hands = sorted(lines, key=lambda x: (score_hand(replace_jokers(x[0])).value, [card_rank_joker[card] for card in x[0]]))
-    total = sum([(i + 1) * score for i, (_, score) in enumerate(ordered_hands)])
+    ordered_hands = sorted(lines, key=lambda x: (score_hand(replace_jokers(x[0])), [card_rank_joker[card] for card in x[0]]))
+    total = sum(rank * bid for rank, (_, bid) in enumerate(ordered_hands, 1))
     return total
 
 
