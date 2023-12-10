@@ -161,3 +161,7 @@ cython_debug/
 
 
 __template
+
+**/input.txt
+
+.DS_Store
