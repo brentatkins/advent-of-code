@@ -5,7 +5,8 @@ from icecream import ic
 
 
 def parse(puzzle_input):
-    return puzzle_input.split(',')
+    return puzzle_input.split(",")
+
 
 def calculate_hash(value):
     current_value = 0
@@ -13,8 +14,9 @@ def calculate_hash(value):
         current_value += ord(c)
         current_value *= 17
         current_value %= 256
-    
+
     return current_value
+
 
 def part1(steps):
     total = sum([calculate_hash(step) for step in steps])
@@ -24,31 +26,33 @@ def part1(steps):
 def part2(steps):
     boxes = {}
     for step in steps:
-        if step[-1] == '-':
+        if step[-1] == "-":
             label = step[:-1]
-            hashed_label = calculate_hash(label)
-            if hashed_label in boxes.keys():
-                boxes[hashed_label] = [(l, f) for l, f in boxes[hashed_label] if l != label]
+            box = calculate_hash(label)
+            if box in boxes.keys():
+                boxes[box] = [(l, f) for l, f in boxes[box] if l != label]
         else:
             label = step[:-2]
             focal_length = int(step[-1])
-            hashed_label = calculate_hash(label)
-            if hashed_label in boxes.keys():
-                if label in [l for l, f in boxes[hashed_label]]:
-                    boxes[hashed_label] = [(l, focal_length) if l == label else (l, f) for l, f in boxes[hashed_label]]
+            box = calculate_hash(label)
+            if box in boxes.keys():
+                if label in [l for l, f in boxes[box]]:
+                    boxes[box] = [
+                        (l, focal_length) if l == label else (l, f)
+                        for l, f in boxes[box]
+                    ]
                 else:
-                    boxes[hashed_label].append((label, focal_length))
+                    boxes[box].append((label, focal_length))
             else:
-                boxes[hashed_label] = [(label, focal_length)]
-    
+                boxes[box] = [(label, focal_length)]
+
     total = 0
-    for hashed_label, lenses in boxes.items():
+    for box, lenses in boxes.items():
         if len(lenses) > 0:
             for i, (_, focal_length) in enumerate(lenses):
-                total += (hashed_label + 1) * (i + 1) * focal_length
+                total += (box + 1) * (i + 1) * focal_length
 
     return total
-
 
 
 def solve(puzzle_input):
