@@ -69,10 +69,12 @@ def part2(lines):
         else:
             break
 
-    first = calculated.index(lines)
-
-    target = (1000000000 - first) % (count - first) + first
+    start_of_cycle = calculated.index(lines)
+    cycle_length = count - start_of_cycle
+    target = (1000000000 - start_of_cycle) % cycle_length + start_of_cycle
     lines = calculated[target]
+
+    ic(start_of_cycle, cycle_length, target)
 
     # ic(lines)
     total = sum(x.count('O') * (i + 1)  for i, x in enumerate(reversed(lines)))
