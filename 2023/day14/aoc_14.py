@@ -1,4 +1,5 @@
 from functools import reduce
+from itertools import pairwise
 import pathlib
 import sys
 from icecream import ic
@@ -21,9 +22,15 @@ def tilt_line(current_line, line_below):
 
     return (result1, result2)
 
+def can_move(current_line, line_below): 
+    for i, c in enumerate(current_line):
+        if c == '.' and line_below[i] == 'O':
+            return True
+        
+    return False
 
 def part1(lines):
-    for i in range(50):
+    while sum(1 if can_move(c, n) else 0 for c, n in pairwise(lines)):
         for i, line in enumerate(lines):
             if i == len(lines) - 1:
                 lines[i] = ''.join('.' if c == 'O' and lines[i - 1][j] == '.' else c for j, c in enumerate(line))
@@ -39,15 +46,14 @@ def rotate_90(grid):
     return [list(reversed(x)) for x in zip(*grid)]
 
 def part2(lines):
-    # ic(lines)
-    # ic([''.join(x) for x in rotate_90(lines)])
 
-    cycles = 1000000000
-    for cycle in range(cycles):
-        # if cycle % 1000 == 0:
-        # ic(cycle)
+    calculated = [lines]
+    count = 0
+
+    while True:
+        count += 1
         for _ in range(4):
-            for i in range(50):
+            while sum(1 if can_move(c, n) else 0 for c, n in pairwise(lines)):
                 for i, line in enumerate(lines):
                     if i == len(lines) - 1:
                         lines[i] = ''.join('.' if c == 'O' and lines[i - 1][j] == '.' else c for j, c in enumerate(line))
@@ -55,9 +61,20 @@ def part2(lines):
                         c, n = tilt_line(line, lines[i + 1])
                         lines[i] = c
                         lines[i + 1] = n
+            
             lines = [''.join(x) for x in rotate_90(lines)]
-    
-    ic(lines)
+
+        if lines not in calculated[1:]:
+            calculated.append([l for l in lines])
+        else:
+            break
+
+    first = calculated.index(lines)
+
+    target = (1000000000 - first) % (count - first) + first
+    lines = calculated[target]
+
+    # ic(lines)
     total = sum(x.count('O') * (i + 1)  for i, x in enumerate(reversed(lines)))
     return total
 
