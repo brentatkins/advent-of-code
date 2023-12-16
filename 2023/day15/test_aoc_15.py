@@ -41,5 +41,5 @@ def test_part1_example1(example1):
     assert aoc.part1(example1) == 1320
 
 
-# def test_part2_example1(example1):
-#     assert aoc.part2(example1) == 71503
+def test_part2_example1(example1):
+    assert aoc.part2(example1) == 145

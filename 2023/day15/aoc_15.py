@@ -21,8 +21,33 @@ def part1(steps):
     return total
 
 
-def part2(lines):
-    return False
+def part2(steps):
+    boxes = {}
+    for step in steps:
+        if step[-1] == '-':
+            label = step[:-1]
+            hashed_label = calculate_hash(label)
+            if hashed_label in boxes.keys():
+                boxes[hashed_label] = [(l, f) for l, f in boxes[hashed_label] if l != label]
+        else:
+            label = step[:-2]
+            focal_length = int(step[-1])
+            hashed_label = calculate_hash(label)
+            if hashed_label in boxes.keys():
+                if label in [l for l, f in boxes[hashed_label]]:
+                    boxes[hashed_label] = [(l, focal_length) if l == label else (l, f) for l, f in boxes[hashed_label]]
+                else:
+                    boxes[hashed_label].append((label, focal_length))
+            else:
+                boxes[hashed_label] = [(label, focal_length)]
+    
+    total = 0
+    for hashed_label, lenses in boxes.items():
+        if len(lenses) > 0:
+            for i, (_, focal_length) in enumerate(lenses):
+                total += (hashed_label + 1) * (i + 1) * focal_length
+
+    return total
 
 
 
